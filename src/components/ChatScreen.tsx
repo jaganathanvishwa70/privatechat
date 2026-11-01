@@ -259,7 +259,7 @@ export function ChatScreen({ darkMode, onToggleDarkMode, onLock }: ChatScreenPro
               <div
                 key={c.id}
                 onClick={() => { setActiveId(c.id); setSidebarOpen(false); }}
-                className={`group flex items-center gap-2.5 px-3 py-2.5 rounded-xl cursor-pointer transition mb-0.5 ${
+                className={`depth-item group flex items-center gap-2.5 px-3 py-2.5 rounded-xl cursor-pointer transition mb-0.5 ${
                   c.id === activeId ? 'bg-emerald-50' : 'hover:bg-slate-50'
                 }`}
               >

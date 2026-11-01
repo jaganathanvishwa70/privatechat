@@ -38,7 +38,7 @@ export function StorageUsage() {
   const isNearLimit = percent >= 80;
 
   return (
-    <div className="rounded-2xl bg-slate-50 dark:bg-slate-800/80 ring-1 ring-slate-200/80 dark:ring-slate-700 p-3.5">
+    <div className="depth-card rounded-2xl bg-slate-50 dark:bg-slate-800/80 ring-1 ring-slate-200/80 dark:ring-slate-700 p-3.5">
       <div className="flex items-center gap-2 mb-2.5">
         <div className="w-7 h-7 rounded-lg bg-emerald-100 dark:bg-emerald-500/15 flex items-center justify-center">
           <Database className="w-3.5 h-3.5 text-emerald-600 dark:text-emerald-400" />

@@ -113,3 +113,61 @@
 .dark select {
   color-scheme: dark;
 }
+
+.scene-3d {
+  perspective: 900px;
+}
+
+.logo-3d {
+  transform-style: preserve-3d;
+  transition: transform 300ms ease, box-shadow 300ms ease;
+  box-shadow: 0 18px 28px -14px rgb(16 185 129 / 0.8), 0 8px 0 -3px rgb(5 150 105 / 0.28);
+}
+
+.logo-3d:hover {
+  transform: rotateX(8deg) rotateY(-10deg) translateY(-3px);
+  box-shadow: 0 24px 34px -14px rgb(16 185 129 / 0.85), 0 10px 0 -3px rgb(5 150 105 / 0.28);
+}
+
+.depth-card {
+  transform-style: preserve-3d;
+  transition: transform 220ms ease, box-shadow 220ms ease, border-color 220ms ease;
+  box-shadow: 0 10px 24px -18px rgb(15 23 42 / 0.8), 0 2px 0 rgb(148 163 184 / 0.16);
+}
+
+.depth-card:hover {
+  transform: translateY(-2px) rotateX(1.5deg);
+  box-shadow: 0 18px 30px -18px rgb(15 23 42 / 0.7), 0 3px 0 rgb(148 163 184 / 0.18);
+}
+
+.depth-card:active {
+  transform: translateY(1px) scale(0.995);
+}
+
+.depth-surface {
+  box-shadow: 0 -10px 30px -24px rgb(15 23 42 / 0.7), 0 -2px 0 rgb(148 163 184 / 0.12);
+}
+
+.depth-item {
+  transition: transform 180ms ease, box-shadow 180ms ease, background-color 180ms ease;
+}
+
+.depth-item:hover {
+  transform: translateX(2px);
+  box-shadow: inset 3px 0 0 rgb(16 185 129 / 0.55);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .logo-3d,
+  .depth-card,
+  .depth-item {
+    transition: none;
+  }
+
+  .logo-3d:hover,
+  .depth-card:hover,
+  .depth-card:active,
+  .depth-item:hover {
+    transform: none;
+  }
+}

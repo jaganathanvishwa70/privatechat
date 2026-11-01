@@ -61,8 +61,10 @@ export function PinScreen({ darkMode, onToggleDarkMode, onUnlock }: PinScreenPro
         <ThemeToggle darkMode={darkMode} onToggle={onToggleDarkMode} />
       </div>
       <div className="w-full max-w-xs flex flex-col items-center">
-        <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-emerald-500 to-teal-600 flex items-center justify-center shadow-lg shadow-emerald-500/25 mb-4">
-          <MessageSquare className="w-8 h-8 text-white" strokeWidth={2.2} />
+        <div className="scene-3d mb-4">
+          <div className="logo-3d w-16 h-16 rounded-2xl bg-gradient-to-br from-emerald-500 to-teal-600 flex items-center justify-center shadow-lg shadow-emerald-500/25">
+            <MessageSquare className="w-8 h-8 text-white" strokeWidth={2.2} />
+          </div>
         </div>
         <h1 className="text-xl font-semibold text-slate-800 dark:text-white tracking-tight">Private Chat</h1>
         <p className="text-sm text-slate-400 mt-1 mb-7 flex items-center gap-1.5">

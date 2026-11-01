@@ -163,7 +163,7 @@ export function MessageInput({ onSend, disabled }: MessageInputProps) {
   }
 
   return (
-    <div className="relative bg-white/80 backdrop-blur border-t border-slate-200">
+    <div className="depth-surface relative bg-white/80 backdrop-blur border-t border-slate-200">
       {/* pending previews */}
       {pending.length > 0 && (
         <div className="px-3 pt-3 flex flex-wrap gap-2">
@@ -261,7 +261,7 @@ export function MessageInput({ onSend, disabled }: MessageInputProps) {
           </button>
         </div>
 
-        <div className="flex-1 rounded-2xl bg-slate-100 ring-1 ring-slate-200 focus-within:ring-2 focus-within:ring-emerald-200 transition overflow-hidden">
+        <div className="depth-card flex-1 rounded-2xl bg-slate-100 ring-1 ring-slate-200 focus-within:ring-2 focus-within:ring-emerald-200 transition overflow-hidden">
           {/* mode selector */}
           <div className="flex items-center gap-1.5 px-3 pt-2 overflow-x-auto whitespace-nowrap no-scrollbar">
             <button
