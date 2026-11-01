@@ -335,8 +335,8 @@ export function ChatScreen({ onLock }: ChatScreenProps) {
 
       {sidebarOpen && <div className="fixed inset-0 bg-black/30 z-20 md:hidden" onClick={() => setSidebarOpen(false)} />}
 
-      <div className="flex-1 flex flex-col h-full min-w-0">
-        <header className="flex items-center gap-3 px-4 py-3 bg-white/80 backdrop-blur border-b border-slate-200">
+      <div className="flex-1 flex flex-col h-full min-w-0 min-h-0 bg-slate-50">
+        <header className="shrink-0 sticky top-0 z-20 flex items-center gap-3 px-3 sm:px-4 py-3 bg-white/95 backdrop-blur border-b border-slate-200 shadow-[0_1px_10px_rgba(15,23,42,0.04)]">
           <button onClick={() => setSidebarOpen(true)} className="md:hidden text-slate-500">
             <Menu className="w-5 h-5" />
           </button>
@@ -348,7 +348,7 @@ export function ChatScreen({ onLock }: ChatScreenProps) {
           </button>
         </header>
 
-        <div className="flex-1 flex flex-col overflow-hidden">
+        <div className="flex-1 min-h-0 flex flex-col overflow-hidden">
           <MessageList messages={messages} loading={loadingMsgs} />
           <div ref={messagesEndRef} />
         </div>
