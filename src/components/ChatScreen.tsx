@@ -4,16 +4,20 @@ import { supabase } from '@/lib/supabase';
 import type { Conversation, Message, PendingFile } from '@/lib/types';
 import { MessageList } from './MessageList';
 import { MessageInput } from './MessageInput';
+import { StorageUsage } from './StorageUsage';
+import { ThemeToggle } from './ThemeToggle';
 
 function newConversationTitle(): string {
   return new Date().toLocaleDateString([], { month: 'short', day: 'numeric' }) + ' Chat';
 }
 
 interface ChatScreenProps {
+  darkMode: boolean;
+  onToggleDarkMode: () => void;
   onLock: () => void;
 }
 
-export function ChatScreen({ onLock }: ChatScreenProps) {
+export function ChatScreen({ darkMode, onToggleDarkMode, onLock }: ChatScreenProps) {
   const [conversations, setConversations] = useState<Conversation[]>([]);
   const [activeId, setActiveId] = useState<string | null>(null);
   const [messages, setMessages] = useState<Message[]>([]);
@@ -218,11 +222,11 @@ export function ChatScreen({ onLock }: ChatScreenProps) {
   const activeConversation = conversations.find((c) => c.id === activeId);
 
   return (
-    <div className="flex h-screen bg-slate-50 overflow-hidden">
+    <div className="flex h-screen bg-slate-50 dark:bg-slate-950 text-slate-800 dark:text-slate-100 overflow-hidden transition-colors">
       <aside
         className={`${
           sidebarOpen ? 'translate-x-0' : '-translate-x-full'
-        } md:translate-x-0 fixed md:relative z-30 w-72 h-full bg-white border-r border-slate-200 flex flex-col transition-transform`}
+        } md:translate-x-0 fixed md:relative z-30 w-72 h-full bg-white dark:bg-slate-900 border-r border-slate-200 dark:border-slate-800 flex flex-col transition-transform`}
       >
         <div className="flex items-center justify-between p-4 border-b border-slate-200">
           <div className="flex items-center gap-2">
@@ -323,10 +327,11 @@ export function ChatScreen({ onLock }: ChatScreenProps) {
           )}
         </div>
 
-        <div className="p-3 border-t border-slate-200">
+        <div className="p-3 space-y-3 border-t border-slate-200 dark:border-slate-800">
+          <StorageUsage />
           <button
             onClick={onLock}
-            className="w-full flex items-center justify-center gap-2 py-2 text-sm font-medium text-slate-600 bg-slate-100 hover:bg-slate-200 rounded-xl transition"
+            className="w-full flex items-center justify-center gap-2 py-2 text-sm font-medium text-slate-600 dark:text-slate-300 bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 rounded-xl transition"
           >
             <Lock className="w-4 h-4" /> Lock
           </button>
@@ -335,7 +340,7 @@ export function ChatScreen({ onLock }: ChatScreenProps) {
 
       {sidebarOpen && <div className="fixed inset-0 bg-black/30 z-20 md:hidden" onClick={() => setSidebarOpen(false)} />}
 
-      <div className="flex-1 flex flex-col h-full min-w-0 min-h-0 bg-slate-50">
+      <div className="flex-1 flex flex-col h-full min-w-0 min-h-0 bg-slate-50 dark:bg-slate-950">
         <header className="shrink-0 sticky top-0 z-20 flex items-center gap-3 px-3 sm:px-4 py-3 bg-white/95 backdrop-blur border-b border-slate-200 shadow-[0_1px_10px_rgba(15,23,42,0.04)]">
           <button onClick={() => setSidebarOpen(true)} className="md:hidden text-slate-500">
             <Menu className="w-5 h-5" />
@@ -343,9 +348,12 @@ export function ChatScreen({ onLock }: ChatScreenProps) {
           <h1 className="text-sm font-semibold text-slate-800 truncate flex-1">
             {activeConversation?.title || 'Chat'}
           </h1>
-          <button onClick={onLock} className="text-slate-400 hover:text-slate-600 transition" title="Lock">
-            <Lock className="w-4 h-4" />
-          </button>
+          <div className="flex items-center gap-1.5">
+            <ThemeToggle darkMode={darkMode} onToggle={onToggleDarkMode} compact />
+            <button onClick={onLock} className="w-9 h-9 rounded-xl text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 transition flex items-center justify-center" title="Lock">
+              <Lock className="w-4 h-4" />
+            </button>
+          </div>
         </header>
 
         <div className="flex-1 min-h-0 flex flex-col overflow-hidden">

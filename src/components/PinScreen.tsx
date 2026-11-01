@@ -1,14 +1,17 @@
 import { useEffect, useRef, useState } from 'react';
 import { MessageSquare, Delete, Lock } from 'lucide-react';
+import { ThemeToggle } from './ThemeToggle';
 
 const CORRECT_PIN = '2727';
 const STORAGE_KEY = 'pin_unlocked_session';
 
 interface PinScreenProps {
+  darkMode: boolean;
+  onToggleDarkMode: () => void;
   onUnlock: () => void;
 }
 
-export function PinScreen({ onUnlock }: PinScreenProps) {
+export function PinScreen({ darkMode, onToggleDarkMode, onUnlock }: PinScreenProps) {
   const [pin, setPin] = useState('');
   const [error, setError] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
@@ -53,12 +56,15 @@ export function PinScreen({ onUnlock }: PinScreenProps) {
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center px-4 bg-gradient-to-br from-slate-100 via-white to-emerald-50/40">
+    <div className="relative min-h-screen flex items-center justify-center px-4 bg-gradient-to-br from-slate-100 via-white to-emerald-50/40 dark:from-slate-950 dark:via-slate-900 dark:to-emerald-950/40 transition-colors">
+      <div className="absolute top-4 right-4">
+        <ThemeToggle darkMode={darkMode} onToggle={onToggleDarkMode} />
+      </div>
       <div className="w-full max-w-xs flex flex-col items-center">
         <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-emerald-500 to-teal-600 flex items-center justify-center shadow-lg shadow-emerald-500/25 mb-4">
           <MessageSquare className="w-8 h-8 text-white" strokeWidth={2.2} />
         </div>
-        <h1 className="text-xl font-semibold text-slate-800 tracking-tight">Private Chat</h1>
+        <h1 className="text-xl font-semibold text-slate-800 dark:text-white tracking-tight">Private Chat</h1>
         <p className="text-sm text-slate-400 mt-1 mb-7 flex items-center gap-1.5">
           <Lock className="w-3.5 h-3.5" /> Enter your 4-digit PIN
         </p>
@@ -103,7 +109,7 @@ export function PinScreen({ onUnlock }: PinScreenProps) {
               key={d}
               onClick={() => press(d)}
               disabled={error}
-              className="w-16 h-16 text-xl font-medium text-slate-700 bg-white rounded-2xl shadow-sm ring-1 ring-slate-200 hover:bg-slate-50 active:scale-95 transition disabled:opacity-50"
+              className="w-16 h-16 text-xl font-medium text-slate-700 dark:text-slate-100 bg-white dark:bg-slate-800 rounded-2xl shadow-sm ring-1 ring-slate-200 dark:ring-slate-700 hover:bg-slate-50 dark:hover:bg-slate-700 active:scale-95 transition disabled:opacity-50"
             >
               {d}
             </button>
@@ -112,14 +118,14 @@ export function PinScreen({ onUnlock }: PinScreenProps) {
           <button
             onClick={() => press('0')}
             disabled={error}
-            className="w-16 h-16 text-xl font-medium text-slate-700 bg-white rounded-2xl shadow-sm ring-1 ring-slate-200 hover:bg-slate-50 active:scale-95 transition disabled:opacity-50"
+            className="w-16 h-16 text-xl font-medium text-slate-700 dark:text-slate-100 bg-white dark:bg-slate-800 rounded-2xl shadow-sm ring-1 ring-slate-200 dark:ring-slate-700 hover:bg-slate-50 dark:hover:bg-slate-700 active:scale-95 transition disabled:opacity-50"
           >
             0
           </button>
           <button
             onClick={backspace}
             disabled={error || pin.length === 0}
-            className="w-16 h-16 text-slate-500 rounded-2xl hover:bg-slate-100 active:scale-95 transition flex items-center justify-center disabled:opacity-40"
+            className="w-16 h-16 text-slate-500 dark:text-slate-300 rounded-2xl hover:bg-slate-100 dark:hover:bg-slate-800 active:scale-95 transition flex items-center justify-center disabled:opacity-40"
           >
             <Delete className="w-6 h-6" />
           </button>
