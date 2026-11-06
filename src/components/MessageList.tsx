@@ -1,4 +1,5 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, useCallback } from 'react';
+import { ChevronDown } from 'lucide-react';
 import { FileAttachmentCard, ImageAttachment } from './FileAttachmentCard';
 import { CodeMessage } from './CodeMessage';
 import { ImageViewer } from './ImageViewer';
@@ -22,21 +23,35 @@ function DateDivider({ label }: { label: string }) {
 
 export function MessageList({ messages, loading }: MessageListProps) {
   const [viewer, setViewer] = useState<Attachment | null>(null);
+  const [showScrollBtn, setShowScrollBtn] = useState(false);
   const scrollRef = useRef<HTMLDivElement>(null);
   const images = messages.filter((m) => m.attachments?.some((a) => a.mime_type.startsWith('image/')));
 
-  useEffect(() => {
-    if (loading || messages.length === 0) return;
+  const scrollToBottom = useCallback((behavior: ScrollBehavior = 'smooth') => {
     const el = scrollRef.current;
     if (!el) return;
-    requestAnimationFrame(() => {
-      el.scrollTo({ top: el.scrollHeight, behavior: 'auto' });
-    });
-  }, [loading, messages]);
+    el.scrollTo({ top: el.scrollHeight, behavior });
+  }, []);
+
+  useEffect(() => {
+    if (loading || messages.length === 0) return;
+    requestAnimationFrame(() => scrollToBottom('auto'));
+  }, [loading, messages, scrollToBottom]);
+
+  const handleScroll = () => {
+    const el = scrollRef.current;
+    if (!el) return;
+    const distanceFromBottom = el.scrollHeight - el.scrollTop - el.clientHeight;
+    setShowScrollBtn(distanceFromBottom > 120);
+  };
 
   return (
     <>
-      <div ref={scrollRef} className="flex-1 overflow-y-auto px-3 sm:px-4 py-4">
+      <div
+        ref={scrollRef}
+        onScroll={handleScroll}
+        className="flex-1 overflow-y-auto px-3 sm:px-4 py-4 relative"
+      >
         {loading ? (
           <div className="flex flex-col items-center justify-center h-full text-slate-400 gap-2">
             <div className="w-6 h-6 border-2 border-slate-200 border-t-emerald-400 rounded-full animate-spin" />
@@ -105,6 +120,21 @@ export function MessageList({ messages, loading }: MessageListProps) {
         )}
         <div className="h-px" />
       </div>
+
+      {showScrollBtn && !loading && messages.length > 0 && (
+        <button
+          onClick={() => scrollToBottom('smooth')}
+          className="absolute bottom-4 right-4 z-10 w-10 h-10 rounded-full bg-white dark:bg-slate-800 shadow-lg ring-1 ring-slate-200 dark:ring-slate-700 text-slate-600 dark:text-slate-300 hover:text-emerald-600 hover:ring-emerald-300 transition-all flex items-center justify-center animate-in fade-in zoom-in duration-200"
+          title="Scroll to latest message"
+        >
+          <ChevronDown className="w-5 h-5" />
+          {images.length > 0 && (
+            <span className="absolute -top-1 -right-1 w-4 h-4 rounded-full bg-emerald-500 text-white text-[9px] font-bold flex items-center justify-center">
+              {images.length}
+            </span>
+          )}
+        </button>
+      )}
 
       {viewer && <ImageViewer attachment={viewer} onClose={() => setViewer(null)} />}
     </>
