@@ -78,7 +78,7 @@ export function MessageList({ messages, loading }: MessageListProps) {
               const fileAttachments = msg.attachments?.filter((a) => !a.mime_type.startsWith('image/')) || [];
 
               return (
-                <div key={msg.id}>
+                <div key={msg.id} className="animate-[slideUp_0.2s_ease-out]">
                   {showDate && <DateDivider label={formatDateLabel(msg.created_at)} />}
                   <div className="flex justify-end group">
                     <div className="flex flex-col items-end gap-1.5 max-w-full">
@@ -86,15 +86,15 @@ export function MessageList({ messages, loading }: MessageListProps) {
                         <CodeMessage code={msg.content} language={msg.language} timestamp={msg.created_at} />
                       )}
                       {msg.message_type === 'normal' && msg.content && (
-                        <div className="bg-emerald-500 text-white rounded-2xl rounded-br-md px-4 py-2.5 max-w-xl shadow-sm">
+                        <div className="bubble-3d bg-gradient-to-br from-emerald-500 to-teal-600 text-white rounded-2xl rounded-br-md px-4 py-2.5 max-w-xl">
                           <p className="text-sm whitespace-pre-wrap break-words leading-relaxed">{msg.content}</p>
-                          <p className="text-[10px] text-emerald-100/70 mt-1 text-right">{formatTime(msg.created_at)}</p>
+                          <p className="text-[10px] text-emerald-100/80 mt-1 text-right">{formatTime(msg.created_at)}</p>
                         </div>
                       )}
                       {(msg.message_type === 'file' || msg.message_type === 'image') && msg.content && (
-                        <div className="bg-emerald-500 text-white rounded-2xl rounded-br-md px-4 py-2.5 max-w-xl shadow-sm">
+                        <div className="bubble-3d bg-gradient-to-br from-emerald-500 to-teal-600 text-white rounded-2xl rounded-br-md px-4 py-2.5 max-w-xl">
                           <p className="text-sm whitespace-pre-wrap break-words leading-relaxed">{msg.content}</p>
-                          <p className="text-[10px] text-emerald-100/70 mt-1 text-right">{formatTime(msg.created_at)}</p>
+                          <p className="text-[10px] text-emerald-100/80 mt-1 text-right">{formatTime(msg.created_at)}</p>
                         </div>
                       )}
                       {imageAttachments.length > 0 && (
@@ -124,12 +124,12 @@ export function MessageList({ messages, loading }: MessageListProps) {
       {showScrollBtn && !loading && messages.length > 0 && (
         <button
           onClick={() => scrollToBottom('smooth')}
-          className="absolute bottom-4 right-4 z-10 w-10 h-10 rounded-full bg-white dark:bg-slate-800 shadow-lg ring-1 ring-slate-200 dark:ring-slate-700 text-slate-600 dark:text-slate-300 hover:text-emerald-600 hover:ring-emerald-300 transition-all flex items-center justify-center animate-in fade-in zoom-in duration-200"
+          className="scroll-btn-3d absolute bottom-4 right-4 z-10 w-11 h-11 rounded-full bg-gradient-to-br from-emerald-400 to-teal-500 text-white hover:text-white ring-1 ring-emerald-300/50 transition-all flex items-center justify-center animate-in fade-in zoom-in duration-200"
           title="Scroll to latest message"
         >
           <ChevronDown className="w-5 h-5" />
           {images.length > 0 && (
-            <span className="absolute -top-1 -right-1 w-4 h-4 rounded-full bg-emerald-500 text-white text-[9px] font-bold flex items-center justify-center">
+            <span className="absolute -top-1 -right-1 w-4 h-4 rounded-full bg-cyan-400 text-white text-[9px] font-bold flex items-center justify-center shadow-sm">
               {images.length}
             </span>
           )}

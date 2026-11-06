@@ -12,7 +12,7 @@
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-    background: #f8fafc;
+    background: #f1f5f9;
   }
   .dark body {
     background: #020617;
@@ -35,8 +35,30 @@
   40%, 80% { transform: translateX(8px); }
 }
 
+@keyframes gradientShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+@keyframes floatGlow {
+  0%, 100% { box-shadow: 0 18px 28px -14px rgb(16 185 129 / 0.6), 0 8px 0 -3px rgb(5 150 105 / 0.25); }
+  50% { box-shadow: 0 22px 32px -14px rgb(16 185 129 / 0.8), 0 10px 0 -3px rgb(5 150 105 / 0.3); }
+}
+
+@keyframes pulseRing {
+  0% { transform: scale(0.95); opacity: 0.7; }
+  70% { transform: scale(1.3); opacity: 0; }
+  100% { transform: scale(1.3); opacity: 0; }
+}
+
 .animate-shake {
   animation: shake 0.4s ease-in-out;
+}
+
+.animated-gradient {
+  background-size: 200% 200%;
+  animation: gradientShift 6s ease infinite;
 }
 
 /* CodeMirror: match rounded container */
@@ -62,11 +84,11 @@
   height: 8px;
 }
 ::-webkit-scrollbar-thumb {
-  background: rgb(203 213 225);
+  background: linear-gradient(to bottom, rgb(16 185 129), rgb(20 184 166));
   border-radius: 9999px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: rgb(148 163 184);
+  background: linear-gradient(to bottom, rgb(5 150 105), rgb(13 148 136));
 }
 ::-webkit-scrollbar-track {
   background: transparent;
@@ -114,6 +136,8 @@
   color-scheme: dark;
 }
 
+/* ============ 3D Depth System ============ */
+
 .scene-3d {
   perspective: 900px;
 }
@@ -121,23 +145,46 @@
 .logo-3d {
   transform-style: preserve-3d;
   transition: transform 300ms ease, box-shadow 300ms ease;
-  box-shadow: 0 18px 28px -14px rgb(16 185 129 / 0.8), 0 8px 0 -3px rgb(5 150 105 / 0.28);
+  animation: floatGlow 4s ease-in-out infinite;
 }
 
 .logo-3d:hover {
-  transform: rotateX(8deg) rotateY(-10deg) translateY(-3px);
-  box-shadow: 0 24px 34px -14px rgb(16 185 129 / 0.85), 0 10px 0 -3px rgb(5 150 105 / 0.28);
+  transform: rotateX(10deg) rotateY(-12deg) translateY(-4px) scale(1.05);
 }
 
+/* Glass panels with 3D depth */
+.glass-panel {
+  background: linear-gradient(145deg, rgba(255,255,255,0.95), rgba(248,250,252,0.85));
+  backdrop-filter: blur(12px);
+  box-shadow:
+    0 10px 30px -12px rgba(15, 23, 42, 0.15),
+    0 1px 0 rgba(255, 255, 255, 0.9) inset,
+    0 -1px 0 rgba(148, 163, 184, 0.1) inset;
+}
+
+.dark .glass-panel {
+  background: linear-gradient(145deg, rgba(15,23,42,0.95), rgba(2,6,23,0.85));
+  box-shadow:
+    0 10px 30px -12px rgba(0, 0, 0, 0.5),
+    0 1px 0 rgba(51, 65, 85, 0.4) inset;
+}
+
+/* 3D raised card */
 .depth-card {
   transform-style: preserve-3d;
   transition: transform 220ms ease, box-shadow 220ms ease, border-color 220ms ease;
-  box-shadow: 0 10px 24px -18px rgb(15 23 42 / 0.8), 0 2px 0 rgb(148 163 184 / 0.16);
+  box-shadow:
+    0 10px 24px -18px rgb(15 23 42 / 0.8),
+    0 2px 0 rgb(148 163 184 / 0.16),
+    0 1px 0 rgba(255,255,255,0.6) inset;
 }
 
 .depth-card:hover {
   transform: translateY(-2px) rotateX(1.5deg);
-  box-shadow: 0 18px 30px -18px rgb(15 23 42 / 0.7), 0 3px 0 rgb(148 163 184 / 0.18);
+  box-shadow:
+    0 18px 30px -18px rgb(15 23 42 / 0.7),
+    0 3px 0 rgb(148 163 184 / 0.18),
+    0 1px 0 rgba(255,255,255,0.8) inset;
 }
 
 .depth-card:active {
@@ -157,17 +204,204 @@
   box-shadow: inset 3px 0 0 rgb(16 185 129 / 0.55);
 }
 
+/* 3D gradient button */
+.btn-3d {
+  position: relative;
+  transition: transform 180ms ease, box-shadow 180ms ease, filter 180ms ease;
+  box-shadow:
+    0 6px 16px -6px rgba(16, 185, 129, 0.6),
+    0 3px 0 rgb(5 150 105),
+    0 1px 0 rgba(255,255,255,0.3) inset;
+}
+
+.btn-3d:hover {
+  transform: translateY(-1px);
+  box-shadow:
+    0 10px 20px -6px rgba(16, 185, 129, 0.7),
+    0 4px 0 rgb(5 150 105),
+    0 1px 0 rgba(255,255,255,0.4) inset;
+  filter: brightness(1.05);
+}
+
+.btn-3d:active {
+  transform: translateY(2px);
+  box-shadow:
+    0 2px 8px -4px rgba(16, 185, 129, 0.5),
+    0 1px 0 rgb(5 150 105),
+    0 1px 0 rgba(255,255,255,0.2) inset;
+}
+
+/* 3D secondary button */
+.btn-3d-secondary {
+  transition: transform 180ms ease, box-shadow 180ms ease;
+  box-shadow:
+    0 4px 12px -6px rgba(15, 23, 42, 0.3),
+    0 2px 0 rgba(148, 163, 184, 0.3),
+    0 1px 0 rgba(255,255,255,0.5) inset;
+}
+
+.btn-3d-secondary:hover {
+  transform: translateY(-1px);
+  box-shadow:
+    0 8px 16px -6px rgba(15, 23, 42, 0.25),
+    0 3px 0 rgba(148, 163, 184, 0.35),
+    0 1px 0 rgba(255,255,255,0.7) inset;
+}
+
+.btn-3d-secondary:active {
+  transform: translateY(1px);
+}
+
+/* 3D chat bubble */
+.bubble-3d {
+  box-shadow:
+    0 4px 12px -4px rgba(16, 185, 129, 0.4),
+    0 2px 0 rgba(5, 150, 105, 0.3),
+    0 1px 0 rgba(255,255,255,0.2) inset;
+  transition: transform 200ms ease, box-shadow 200ms ease;
+}
+
+.bubble-3d:hover {
+  transform: translateY(-1px) scale(1.005);
+  box-shadow:
+    0 6px 16px -4px rgba(16, 185, 129, 0.5),
+    0 3px 0 rgba(5, 150, 105, 0.35),
+    0 1px 0 rgba(255,255,255,0.3) inset;
+}
+
+/* 3D keypad button */
+.keypad-3d {
+  transition: transform 150ms ease, box-shadow 150ms ease, background-color 150ms ease;
+  box-shadow:
+    0 6px 14px -4px rgba(15, 23, 42, 0.2),
+    0 3px 0 rgba(148, 163, 184, 0.4),
+    0 1px 0 rgba(255,255,255,0.7) inset;
+}
+
+.keypad-3d:hover {
+  transform: translateY(-2px);
+  box-shadow:
+    0 10px 18px -4px rgba(15, 23, 42, 0.2),
+    0 4px 0 rgba(148, 163, 184, 0.4),
+    0 1px 0 rgba(255,255,255,0.9) inset;
+}
+
+.keypad-3d:active {
+  transform: translateY(2px);
+  box-shadow:
+    0 2px 6px -3px rgba(15, 23, 42, 0.2),
+    0 1px 0 rgba(148, 163, 184, 0.4),
+    0 1px 0 rgba(255,255,255,0.5) inset;
+}
+
+.dark .keypad-3d {
+  box-shadow:
+    0 6px 14px -4px rgba(0, 0, 0, 0.5),
+    0 3px 0 rgba(51, 65, 85, 0.6),
+    0 1px 0 rgba(71, 85, 105, 0.3) inset;
+}
+
+/* Gradient text */
+.gradient-text {
+  background: linear-gradient(135deg, #10b981, #14b8a6, #06b6d4);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-size: 200% 200%;
+  animation: gradientShift 5s ease infinite;
+}
+
+/* Active conversation indicator */
+.active-conv {
+  background: linear-gradient(135deg, rgba(16, 185, 129, 0.12), rgba(20, 184, 166, 0.08));
+  box-shadow:
+    inset 3px 0 0 rgb(16 185 129),
+    0 4px 12px -6px rgba(16, 185, 129, 0.2),
+    0 1px 0 rgba(255,255,255,0.5) inset;
+}
+
+/* Scroll-to-bottom button glow */
+.scroll-btn-3d {
+  box-shadow:
+    0 8px 20px -6px rgba(16, 185, 129, 0.5),
+    0 3px 0 rgba(5, 150, 105, 0.3),
+    0 1px 0 rgba(255,255,255,0.5) inset;
+  transition: transform 200ms ease, box-shadow 200ms ease;
+}
+
+.scroll-btn-3d:hover {
+  transform: translateY(-2px) scale(1.05);
+  box-shadow:
+    0 12px 24px -6px rgba(16, 185, 129, 0.6),
+    0 4px 0 rgba(5, 150, 105, 0.35),
+    0 1px 0 rgba(255,255,255,0.7) inset;
+}
+
+/* Sidebar gradient background */
+.sidebar-gradient {
+  background: linear-gradient(180deg, #ffffff 0%, #f0fdfa 100%);
+}
+
+.dark .sidebar-gradient {
+  background: linear-gradient(180deg, #0f172a 0%, #042f2e 100%);
+}
+
+/* Chat area gradient background */
+.chat-bg-gradient {
+  background:
+    radial-gradient(ellipse at top right, rgba(20, 184, 166, 0.06), transparent 50%),
+    radial-gradient(ellipse at bottom left, rgba(6, 182, 212, 0.05), transparent 50%),
+    #f1f5f9;
+}
+
+.dark .chat-bg-gradient {
+  background:
+    radial-gradient(ellipse at top right, rgba(20, 184, 166, 0.08), transparent 50%),
+    radial-gradient(ellipse at bottom left, rgba(59, 130, 246, 0.06), transparent 50%),
+    #020617;
+}
+
+/* Header gradient */
+.header-gradient {
+  background: linear-gradient(135deg, rgba(255,255,255,0.97), rgba(240, 253, 250, 0.9));
+}
+
+.dark .header-gradient {
+  background: linear-gradient(135deg, rgba(15,23,42,0.97), rgba(2, 6, 23, 0.9));
+}
+
+/* Progress bar glow */
+.progress-glow {
+  box-shadow: 0 0 12px rgba(16, 185, 129, 0.5), 0 1px 0 rgba(255,255,255,0.3) inset;
+}
+
 @media (prefers-reduced-motion: reduce) {
   .logo-3d,
   .depth-card,
-  .depth-item {
+  .depth-item,
+  .btn-3d,
+  .btn-3d-secondary,
+  .bubble-3d,
+  .keypad-3d,
+  .scroll-btn-3d,
+  .animated-gradient,
+  .gradient-text {
     transition: none;
+    animation: none;
   }
 
   .logo-3d:hover,
   .depth-card:hover,
   .depth-card:active,
-  .depth-item:hover {
+  .depth-item:hover,
+  .btn-3d:hover,
+  .btn-3d:active,
+  .btn-3d-secondary:hover,
+  .btn-3d-secondary:active,
+  .bubble-3d:hover,
+  .keypad-3d:hover,
+  .keypad-3d:active,
+  .scroll-btn-3d:hover {
     transform: none;
   }
 }

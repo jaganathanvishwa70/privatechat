@@ -38,10 +38,10 @@ export function StorageUsage() {
   const isNearLimit = percent >= 80;
 
   return (
-    <div className="depth-card rounded-2xl bg-slate-50 dark:bg-slate-800/80 ring-1 ring-slate-200/80 dark:ring-slate-700 p-3.5">
+    <div className="depth-card rounded-2xl bg-gradient-to-br from-slate-50 to-white dark:from-slate-800/80 dark:to-slate-900/80 ring-1 ring-emerald-100/50 dark:ring-slate-700 p-3.5">
       <div className="flex items-center gap-2 mb-2.5">
-        <div className="w-7 h-7 rounded-lg bg-emerald-100 dark:bg-emerald-500/15 flex items-center justify-center">
-          <Database className="w-3.5 h-3.5 text-emerald-600 dark:text-emerald-400" />
+        <div className="w-7 h-7 rounded-lg bg-gradient-to-br from-emerald-400 to-teal-500 flex items-center justify-center shadow-sm shadow-emerald-500/30">
+          <Database className="w-3.5 h-3.5 text-white" />
         </div>
         <div className="flex-1 min-w-0">
           <p className="text-xs font-semibold text-slate-700 dark:text-slate-200">Storage</p>
@@ -51,7 +51,7 @@ export function StorageUsage() {
       </div>
       <div className="h-2 rounded-full bg-slate-200 dark:bg-slate-700 overflow-hidden">
         <div
-          className={`h-full rounded-full transition-all duration-500 ${isNearLimit ? 'bg-amber-500' : 'bg-gradient-to-r from-emerald-400 to-teal-500'}`}
+          className={`progress-glow h-full rounded-full transition-all duration-500 ${isNearLimit ? 'bg-gradient-to-r from-amber-400 to-orange-500' : 'animated-gradient bg-gradient-to-r from-emerald-400 via-teal-400 to-cyan-400'}`}
           style={{ width: `${Math.max(percent, usedBytes > 0 ? 1 : 0)}%` }}
         />
       </div>

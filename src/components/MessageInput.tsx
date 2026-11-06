@@ -163,7 +163,7 @@ export function MessageInput({ onSend, disabled }: MessageInputProps) {
   }
 
   return (
-    <div className="depth-surface relative bg-white/80 backdrop-blur border-t border-slate-200">
+    <div className="depth-surface relative bg-gradient-to-b from-white/90 to-slate-50/80 dark:from-slate-900/90 dark:to-slate-950/80 backdrop-blur border-t border-emerald-100/40 dark:border-slate-800">
       {/* pending previews */}
       {pending.length > 0 && (
         <div className="px-3 pt-3 flex flex-wrap gap-2">
@@ -209,21 +209,21 @@ export function MessageInput({ onSend, disabled }: MessageInputProps) {
         <div className="absolute bottom-full left-3 mb-2 flex flex-col gap-1.5 animate-[slideUp_0.15s_ease-out]">
           <button
             onClick={openPhotoPicker}
-            className="flex items-center gap-2.5 pl-2.5 pr-4 py-2 bg-white rounded-xl shadow-lg ring-1 ring-slate-200 hover:bg-slate-50 transition"
+            className="depth-card flex items-center gap-2.5 pl-2.5 pr-4 py-2 bg-white dark:bg-slate-800 rounded-xl ring-1 ring-emerald-200/50 dark:ring-slate-700 hover:ring-emerald-300 transition"
           >
-            <div className="w-8 h-8 rounded-lg bg-emerald-100 flex items-center justify-center">
-              <ImageIcon className="w-4 h-4 text-emerald-600" />
+            <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-emerald-400 to-teal-500 flex items-center justify-center shadow-sm">
+              <ImageIcon className="w-4 h-4 text-white" />
             </div>
-            <span className="text-sm font-medium text-slate-700">Photo</span>
+            <span className="text-sm font-medium text-slate-700 dark:text-slate-200">Photo</span>
           </button>
           <button
             onClick={openFilePicker}
-            className="flex items-center gap-2.5 pl-2.5 pr-4 py-2 bg-white rounded-xl shadow-lg ring-1 ring-slate-200 hover:bg-slate-50 transition"
+            className="depth-card flex items-center gap-2.5 pl-2.5 pr-4 py-2 bg-white dark:bg-slate-800 rounded-xl ring-1 ring-blue-200/50 dark:ring-slate-700 hover:ring-blue-300 transition"
           >
-            <div className="w-8 h-8 rounded-lg bg-blue-100 flex items-center justify-center">
-              <Paperclip className="w-4 h-4 text-blue-600" />
+            <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-blue-400 to-cyan-500 flex items-center justify-center shadow-sm">
+              <Paperclip className="w-4 h-4 text-white" />
             </div>
-            <span className="text-sm font-medium text-slate-700">File</span>
+            <span className="text-sm font-medium text-slate-700 dark:text-slate-200">File</span>
           </button>
         </div>
       )}
@@ -251,17 +251,17 @@ export function MessageInput({ onSend, disabled }: MessageInputProps) {
           <button
             onClick={() => setMenuOpen((v) => !v)}
             disabled={disabled}
-            className={`w-10 h-10 rounded-full flex items-center justify-center shrink-0 transition-all shadow-sm ${
+            className={`btn-3d w-10 h-10 rounded-full flex items-center justify-center shrink-0 transition-all ${
               menuOpen
-                ? 'bg-slate-800 text-white rotate-90'
-                : 'bg-emerald-500 text-white hover:bg-emerald-600'
+                ? 'bg-gradient-to-br from-slate-700 to-slate-800 text-white rotate-90'
+                : 'bg-gradient-to-br from-emerald-400 to-teal-500 text-white hover:from-emerald-500 hover:to-teal-600'
             }`}
           >
             {menuOpen ? <X className="w-5 h-5" /> : <Plus className="w-5 h-5" />}
           </button>
         </div>
 
-        <div className="depth-card flex-1 rounded-2xl bg-slate-100 ring-1 ring-slate-200 focus-within:ring-2 focus-within:ring-emerald-200 transition overflow-hidden">
+        <div className="depth-card flex-1 rounded-2xl bg-gradient-to-br from-slate-50 to-white dark:from-slate-800 dark:to-slate-900 ring-1 ring-slate-200/80 dark:ring-slate-700 focus-within:ring-2 focus-within:ring-emerald-300 dark:focus-within:ring-emerald-700 transition overflow-hidden">
           {/* mode selector */}
           <div className="flex items-center gap-1.5 px-3 pt-2 overflow-x-auto whitespace-nowrap no-scrollbar">
             <button
@@ -356,7 +356,7 @@ export function MessageInput({ onSend, disabled }: MessageInputProps) {
         <button
           onClick={handleSend}
           disabled={!canSend}
-          className="w-10 h-10 rounded-full bg-gradient-to-br from-emerald-500 to-teal-600 text-white flex items-center justify-center shrink-0 shadow-sm hover:shadow-md active:scale-95 transition disabled:opacity-40 disabled:cursor-not-allowed"
+          className="btn-3d w-10 h-10 rounded-full bg-gradient-to-br from-emerald-400 via-teal-500 to-cyan-500 text-white flex items-center justify-center shrink-0 transition disabled:opacity-40 disabled:cursor-not-allowed"
         >
           {sending ? <Loader2 className="w-4 h-4 animate-spin" /> : <Send className="w-4 h-4" />}
         </button>
