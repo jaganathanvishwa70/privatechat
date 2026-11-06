@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { FileAttachmentCard, ImageAttachment } from './FileAttachmentCard';
 import { CodeMessage } from './CodeMessage';
 import { ImageViewer } from './ImageViewer';
@@ -22,11 +22,21 @@ function DateDivider({ label }: { label: string }) {
 
 export function MessageList({ messages, loading }: MessageListProps) {
   const [viewer, setViewer] = useState<Attachment | null>(null);
+  const scrollRef = useRef<HTMLDivElement>(null);
   const images = messages.filter((m) => m.attachments?.some((a) => a.mime_type.startsWith('image/')));
+
+  useEffect(() => {
+    if (loading || messages.length === 0) return;
+    const el = scrollRef.current;
+    if (!el) return;
+    requestAnimationFrame(() => {
+      el.scrollTo({ top: el.scrollHeight, behavior: 'auto' });
+    });
+  }, [loading, messages]);
 
   return (
     <>
-      <div className="flex-1 overflow-y-auto px-3 sm:px-4 py-4">
+      <div ref={scrollRef} className="flex-1 overflow-y-auto px-3 sm:px-4 py-4">
         {loading ? (
           <div className="flex flex-col items-center justify-center h-full text-slate-400 gap-2">
             <div className="w-6 h-6 border-2 border-slate-200 border-t-emerald-400 rounded-full animate-spin" />
@@ -93,6 +103,7 @@ export function MessageList({ messages, loading }: MessageListProps) {
             })}
           </div>
         )}
+        <div className="h-px" />
       </div>
 
       {viewer && <ImageViewer attachment={viewer} onClose={() => setViewer(null)} />}

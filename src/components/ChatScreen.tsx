@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { Plus, Lock, MessageSquare, Trash2, Loader2, X, Menu, Pencil, Check } from 'lucide-react';
 import { supabase } from '@/lib/supabase';
 import type { Conversation, Message, PendingFile } from '@/lib/types';
@@ -27,7 +27,6 @@ export function ChatScreen({ darkMode, onToggleDarkMode, onLock }: ChatScreenPro
   const [editingConversationId, setEditingConversationId] = useState<string | null>(null);
   const [editingTitle, setEditingTitle] = useState('');
   const [savingTitle, setSavingTitle] = useState(false);
-  const messagesEndRef = useRef<HTMLDivElement>(null);
 
   const loadConversations = useCallback(async () => {
     const { data } = await supabase
@@ -87,9 +86,6 @@ export function ChatScreen({ darkMode, onToggleDarkMode, onLock }: ChatScreenPro
         .order('created_at', { ascending: true });
       setMessages((data as Message[]) || []);
       setLoadingMsgs(false);
-      requestAnimationFrame(() => {
-        messagesEndRef.current?.scrollIntoView({ behavior: 'auto' });
-      });
     })();
   }, [activeId]);
 
@@ -109,9 +105,6 @@ export function ChatScreen({ darkMode, onToggleDarkMode, onLock }: ChatScreenPro
           setMessages((prev) => {
             if (prev.some((m) => m.id === newMsg.id)) return prev;
             return [...prev, { ...newMsg, attachments: atts || [] }];
-          });
-          requestAnimationFrame(() => {
-            messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
           });
         },
       )
@@ -159,9 +152,6 @@ export function ChatScreen({ darkMode, onToggleDarkMode, onLock }: ChatScreenPro
 
     const { data: atts } = await supabase.from('attachments').select('*').eq('message_id', msg.id);
     setMessages((prev) => [...prev, { ...(msg as Message), attachments: atts || [] }]);
-    requestAnimationFrame(() => {
-      messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
-    });
   }
 
   async function startNewConversation() {
@@ -365,7 +355,6 @@ export function ChatScreen({ darkMode, onToggleDarkMode, onLock }: ChatScreenPro
 
         <div className="flex-1 min-h-0 flex flex-col overflow-hidden">
           <MessageList messages={messages} loading={loadingMsgs} />
-          <div ref={messagesEndRef} />
         </div>
 
         <MessageInput onSend={sendMessage} disabled={!activeId} />
