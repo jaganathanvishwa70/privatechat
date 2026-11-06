@@ -33,11 +33,18 @@ export function ChatScreen({ darkMode, onToggleDarkMode, onLock }: ChatScreenPro
     const { data } = await supabase
       .from('conversations')
       .select('*')
-      .order('updated_at', { ascending: false });
+      .order('updated_at', { ascending: false })
+      .order('created_at', { ascending: false });
     if (data) {
-      setConversations(data as Conversation[]);
-      if (data.length > 0 && !activeId) {
-        setActiveId(data[0].id);
+      const sortedConversations = [...data].sort((a, b) => {
+        const aTime = new Date(a.updated_at || a.created_at).getTime();
+        const bTime = new Date(b.updated_at || b.created_at).getTime();
+        return bTime - aTime;
+      });
+      setConversations(sortedConversations as Conversation[]);
+      if (sortedConversations.length > 0 && !activeId) {
+        setActiveId(sortedConversations[0].id);
+
       } else if (data.length === 0) {
         const { data: created } = await supabase
           .from('conversations')
