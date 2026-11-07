@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useState } from 'react';
 import { Plus, Lock, MessageSquare, Trash2, Loader2, X, Menu, Pencil, Check } from 'lucide-react';
 import { supabase } from '@/lib/supabase';
-import type { Conversation, Message, PendingFile } from '@/lib/types';
+import type { Conversation, Message, PendingFile, Attachment } from '@/lib/types';
 import { MessageList } from './MessageList';
 import { MessageInput } from './MessageInput';
 import { StorageUsage } from './StorageUsage';
@@ -91,24 +91,67 @@ export function ChatScreen({ darkMode, onToggleDarkMode, onLock }: ChatScreenPro
 
   useEffect(() => {
     if (!activeId) return;
+
+    async function fetchAttachments(messageId: string): Promise<Attachment[]> {
+      const { data: atts } = await supabase
+        .from('attachments')
+        .select('*')
+        .eq('message_id', messageId);
+      return (atts as Attachment[]) || [];
+    }
+
+    async function upsertMessage(newMsg: Message) {
+      setMessages((prev) => {
+        if (prev.some((m) => m.id === newMsg.id)) {
+          // already present — refresh its attachments in the background
+          fetchAttachments(newMsg.id).then((atts) => {
+            setMessages((cur) => cur.map((m) =>
+              m.id === newMsg.id ? { ...m, attachments: atts.length ? atts : m.attachments } : m
+            ));
+          });
+          return prev;
+        }
+        return [...prev, { ...newMsg, attachments: [] }];
+      });
+      // fetch attachments separately so we don't block the realtime event
+      const atts = await fetchAttachments(newMsg.id);
+      if (atts.length > 0) {
+        setMessages((prev) => prev.map((m) =>
+          m.id === newMsg.id ? { ...m, attachments: atts } : m
+        ));
+      }
+    }
+
     const channel = supabase
       .channel(`messages-${activeId}`)
       .on(
         'postgres_changes',
         { event: 'INSERT', schema: 'public', table: 'messages', filter: `conversation_id=eq.${activeId}` },
-        async (payload) => {
-          const newMsg = payload.new as Message;
-          const { data: atts } = await supabase
-            .from('attachments')
-            .select('*')
-            .eq('message_id', newMsg.id);
-          setMessages((prev) => {
-            if (prev.some((m) => m.id === newMsg.id)) return prev;
-            return [...prev, { ...newMsg, attachments: atts || [] }];
-          });
+        (payload) => {
+          upsertMessage(payload.new as Message);
+        },
+      )
+      .on(
+        'postgres_changes',
+        { event: 'UPDATE', schema: 'public', table: 'messages', filter: `conversation_id=eq.${activeId}` },
+        (payload) => {
+          upsertMessage(payload.new as Message);
+        },
+      )
+      .on(
+        'postgres_changes',
+        { event: 'INSERT', schema: 'public', table: 'attachments' },
+        (payload) => {
+          const newAtt = payload.new as Attachment;
+          setMessages((prev) => prev.map((m) => {
+            if (m.id !== newAtt.message_id) return m;
+            if (m.attachments?.some((a) => a.id === newAtt.id)) return m;
+            return { ...m, attachments: [...(m.attachments || []), newAtt] };
+          }));
         },
       )
       .subscribe();
+
     return () => { supabase.removeChannel(channel); };
   }, [activeId]);
 
