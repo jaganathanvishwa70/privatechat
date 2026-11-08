@@ -12,7 +12,7 @@
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-    background: #f1f5f9;
+    background: #eef2f7;
   }
   .dark body {
     background: #020617;
@@ -84,11 +84,11 @@
   height: 8px;
 }
 ::-webkit-scrollbar-thumb {
-  background: linear-gradient(to bottom, rgb(16 185 129), rgb(20 184 166));
+  background: linear-gradient(to bottom, rgb(16 185 129), rgb(20 184 166), rgb(6 182 212));
   border-radius: 9999px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: linear-gradient(to bottom, rgb(5 150 105), rgb(13 148 136));
+  background: linear-gradient(to bottom, rgb(5 150 105), rgb(13 148 136), rgb(8 145 178));
 }
 ::-webkit-scrollbar-track {
   background: transparent;
@@ -152,14 +152,15 @@
   transform: rotateX(10deg) rotateY(-12deg) translateY(-4px) scale(1.05);
 }
 
-/* Glass panels with 3D depth */
+/* Glass panels with 3D depth — light mode: warm multi-tone */
 .glass-panel {
-  background: linear-gradient(145deg, rgba(255,255,255,0.95), rgba(248,250,252,0.85));
-  backdrop-filter: blur(12px);
+  background: linear-gradient(145deg, rgba(255,255,255,0.97), rgba(240,253,250,0.88) 60%, rgba(236,254,255,0.8));
+  backdrop-filter: blur(14px);
   box-shadow:
-    0 10px 30px -12px rgba(15, 23, 42, 0.15),
-    0 1px 0 rgba(255, 255, 255, 0.9) inset,
-    0 -1px 0 rgba(148, 163, 184, 0.1) inset;
+    0 10px 30px -12px rgba(13, 148, 136, 0.18),
+    0 4px 16px -8px rgba(59, 130, 246, 0.08),
+    0 1px 0 rgba(255, 255, 255, 0.95) inset,
+    0 -1px 0 rgba(148, 163, 184, 0.12) inset;
 }
 
 .dark .glass-panel {
@@ -169,30 +170,36 @@
     0 1px 0 rgba(51, 65, 85, 0.4) inset;
 }
 
-/* 3D raised card */
+/* 3D raised card — light mode: layered teal + blue glow */
 .depth-card {
   transform-style: preserve-3d;
   transition: transform 220ms ease, box-shadow 220ms ease, border-color 220ms ease;
   box-shadow:
-    0 10px 24px -18px rgb(15 23 42 / 0.8),
-    0 2px 0 rgb(148 163 184 / 0.16),
-    0 1px 0 rgba(255,255,255,0.6) inset;
+    0 10px 24px -18px rgb(15 23 42 / 0.65),
+    0 6px 20px -12px rgb(20 184 166 / 0.15),
+    0 2px 0 rgb(148 163 184 / 0.2),
+    0 1px 0 rgba(255,255,255,0.7) inset;
 }
 
 .depth-card:hover {
   transform: translateY(-2px) rotateX(1.5deg);
   box-shadow:
-    0 18px 30px -18px rgb(15 23 42 / 0.7),
-    0 3px 0 rgb(148 163 184 / 0.18),
-    0 1px 0 rgba(255,255,255,0.8) inset;
+    0 18px 30px -18px rgb(15 23 42 / 0.6),
+    0 10px 24px -12px rgb(20 184 166 / 0.22),
+    0 3px 0 rgb(148 163 184 / 0.22),
+    0 1px 0 rgba(255,255,255,0.9) inset;
 }
 
 .depth-card:active {
   transform: translateY(1px) scale(0.995);
 }
 
+/* Raised surface (input bar) — light mode: blue-tinted shadow */
 .depth-surface {
-  box-shadow: 0 -10px 30px -24px rgb(15 23 42 / 0.7), 0 -2px 0 rgb(148 163 184 / 0.12);
+  box-shadow:
+    0 -10px 30px -24px rgb(15 23 42 / 0.5),
+    0 -6px 20px -16px rgb(59 130 246 / 0.1),
+    0 -2px 0 rgb(148 163 184 / 0.15);
 }
 
 .depth-item {
@@ -204,22 +211,24 @@
   box-shadow: inset 3px 0 0 rgb(16 185 129 / 0.55);
 }
 
-/* 3D gradient button */
+/* 3D gradient button — light mode: richer emerald→teal→cyan glow */
 .btn-3d {
   position: relative;
   transition: transform 180ms ease, box-shadow 180ms ease, filter 180ms ease;
   box-shadow:
-    0 6px 16px -6px rgba(16, 185, 129, 0.6),
+    0 6px 16px -6px rgba(16, 185, 129, 0.55),
+    0 4px 12px -8px rgba(6, 182, 212, 0.25),
     0 3px 0 rgb(5 150 105),
-    0 1px 0 rgba(255,255,255,0.3) inset;
+    0 1px 0 rgba(255,255,255,0.35) inset;
 }
 
 .btn-3d:hover {
   transform: translateY(-1px);
   box-shadow:
-    0 10px 20px -6px rgba(16, 185, 129, 0.7),
+    0 10px 20px -6px rgba(16, 185, 129, 0.65),
+    0 6px 16px -8px rgba(6, 182, 212, 0.35),
     0 4px 0 rgb(5 150 105),
-    0 1px 0 rgba(255,255,255,0.4) inset;
+    0 1px 0 rgba(255,255,255,0.45) inset;
   filter: brightness(1.05);
 }
 
@@ -231,33 +240,34 @@
     0 1px 0 rgba(255,255,255,0.2) inset;
 }
 
-/* 3D secondary button */
+/* 3D secondary button — light mode: blue-slate tint */
 .btn-3d-secondary {
   transition: transform 180ms ease, box-shadow 180ms ease;
   box-shadow:
-    0 4px 12px -6px rgba(15, 23, 42, 0.3),
-    0 2px 0 rgba(148, 163, 184, 0.3),
-    0 1px 0 rgba(255,255,255,0.5) inset;
+    0 4px 12px -6px rgba(59, 130, 246, 0.18),
+    0 2px 0 rgba(148, 163, 184, 0.35),
+    0 1px 0 rgba(255,255,255,0.6) inset;
 }
 
 .btn-3d-secondary:hover {
   transform: translateY(-1px);
   box-shadow:
-    0 8px 16px -6px rgba(15, 23, 42, 0.25),
-    0 3px 0 rgba(148, 163, 184, 0.35),
-    0 1px 0 rgba(255,255,255,0.7) inset;
+    0 8px 16px -6px rgba(59, 130, 246, 0.2),
+    0 3px 0 rgba(148, 163, 184, 0.4),
+    0 1px 0 rgba(255,255,255,0.8) inset;
 }
 
 .btn-3d-secondary:active {
   transform: translateY(1px);
 }
 
-/* 3D chat bubble */
+/* 3D chat bubble — light mode: multi-color glow */
 .bubble-3d {
   box-shadow:
     0 4px 12px -4px rgba(16, 185, 129, 0.4),
+    0 3px 10px -6px rgba(6, 182, 212, 0.2),
     0 2px 0 rgba(5, 150, 105, 0.3),
-    0 1px 0 rgba(255,255,255,0.2) inset;
+    0 1px 0 rgba(255,255,255,0.25) inset;
   transition: transform 200ms ease, box-shadow 200ms ease;
 }
 
@@ -265,32 +275,33 @@
   transform: translateY(-1px) scale(1.005);
   box-shadow:
     0 6px 16px -4px rgba(16, 185, 129, 0.5),
+    0 4px 12px -6px rgba(6, 182, 212, 0.3),
     0 3px 0 rgba(5, 150, 105, 0.35),
-    0 1px 0 rgba(255,255,255,0.3) inset;
+    0 1px 0 rgba(255,255,255,0.35) inset;
 }
 
-/* 3D keypad button */
+/* 3D keypad button — light mode: soft blue inner glow */
 .keypad-3d {
   transition: transform 150ms ease, box-shadow 150ms ease, background-color 150ms ease;
   box-shadow:
-    0 6px 14px -4px rgba(15, 23, 42, 0.2),
-    0 3px 0 rgba(148, 163, 184, 0.4),
-    0 1px 0 rgba(255,255,255,0.7) inset;
+    0 6px 14px -4px rgba(59, 130, 246, 0.12),
+    0 3px 0 rgba(148, 163, 184, 0.45),
+    0 1px 0 rgba(255,255,255,0.8) inset;
 }
 
 .keypad-3d:hover {
   transform: translateY(-2px);
   box-shadow:
-    0 10px 18px -4px rgba(15, 23, 42, 0.2),
-    0 4px 0 rgba(148, 163, 184, 0.4),
-    0 1px 0 rgba(255,255,255,0.9) inset;
+    0 10px 18px -4px rgba(59, 130, 246, 0.15),
+    0 4px 0 rgba(148, 163, 184, 0.45),
+    0 1px 0 rgba(255,255,255,0.95) inset;
 }
 
 .keypad-3d:active {
   transform: translateY(2px);
   box-shadow:
-    0 2px 6px -3px rgba(15, 23, 42, 0.2),
-    0 1px 0 rgba(148, 163, 184, 0.4),
+    0 2px 6px -3px rgba(59, 130, 246, 0.1),
+    0 1px 0 rgba(148, 163, 184, 0.45),
     0 1px 0 rgba(255,255,255,0.5) inset;
 }
 
@@ -301,9 +312,9 @@
     0 1px 0 rgba(71, 85, 105, 0.3) inset;
 }
 
-/* Gradient text */
+/* Gradient text — light mode: emerald → teal → cyan → blue */
 .gradient-text {
-  background: linear-gradient(135deg, #10b981, #14b8a6, #06b6d4);
+  background: linear-gradient(135deg, #059669, #0d9488, #0891b2, #2563eb);
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -311,19 +322,20 @@
   animation: gradientShift 5s ease infinite;
 }
 
-/* Active conversation indicator */
+/* Active conversation indicator — light mode: teal→cyan tint */
 .active-conv {
-  background: linear-gradient(135deg, rgba(16, 185, 129, 0.12), rgba(20, 184, 166, 0.08));
+  background: linear-gradient(135deg, rgba(16, 185, 129, 0.14), rgba(6, 182, 212, 0.08));
   box-shadow:
     inset 3px 0 0 rgb(16 185 129),
     0 4px 12px -6px rgba(16, 185, 129, 0.2),
-    0 1px 0 rgba(255,255,255,0.5) inset;
+    0 1px 0 rgba(255,255,255,0.6) inset;
 }
 
-/* Scroll-to-bottom button glow */
+/* Scroll-to-bottom button glow — light mode: richer */
 .scroll-btn-3d {
   box-shadow:
     0 8px 20px -6px rgba(16, 185, 129, 0.5),
+    0 4px 12px -8px rgba(6, 182, 212, 0.25),
     0 3px 0 rgba(5, 150, 105, 0.3),
     0 1px 0 rgba(255,255,255,0.5) inset;
   transition: transform 200ms ease, box-shadow 200ms ease;
@@ -333,25 +345,27 @@
   transform: translateY(-2px) scale(1.05);
   box-shadow:
     0 12px 24px -6px rgba(16, 185, 129, 0.6),
+    0 6px 16px -8px rgba(6, 182, 212, 0.35),
     0 4px 0 rgba(5, 150, 105, 0.35),
     0 1px 0 rgba(255,255,255,0.7) inset;
 }
 
-/* Sidebar gradient background */
+/* Sidebar gradient background — light mode: white → mint → sky */
 .sidebar-gradient {
-  background: linear-gradient(180deg, #ffffff 0%, #f0fdfa 100%);
+  background: linear-gradient(180deg, #ffffff 0%, #f0fdfa 40%, #ecfeff 100%);
 }
 
 .dark .sidebar-gradient {
   background: linear-gradient(180deg, #0f172a 0%, #042f2e 100%);
 }
 
-/* Chat area gradient background */
+/* Chat area gradient background — light mode: layered teal + cyan + blue radial washes */
 .chat-bg-gradient {
   background:
-    radial-gradient(ellipse at top right, rgba(20, 184, 166, 0.06), transparent 50%),
-    radial-gradient(ellipse at bottom left, rgba(6, 182, 212, 0.05), transparent 50%),
-    #f1f5f9;
+    radial-gradient(ellipse 60% 50% at top right, rgba(20, 184, 166, 0.1), transparent 60%),
+    radial-gradient(ellipse 50% 40% at bottom left, rgba(6, 182, 212, 0.08), transparent 60%),
+    radial-gradient(ellipse 40% 30% at 70% 30%, rgba(59, 130, 246, 0.05), transparent 60%),
+    linear-gradient(160deg, #eef2f7 0%, #f0fdfa 50%, #ecfeff 100%);
 }
 
 .dark .chat-bg-gradient {
@@ -361,18 +375,90 @@
     #020617;
 }
 
-/* Header gradient */
+/* Header gradient — light mode: white → mint → sky with depth */
 .header-gradient {
-  background: linear-gradient(135deg, rgba(255,255,255,0.97), rgba(240, 253, 250, 0.9));
+  background: linear-gradient(135deg, rgba(255,255,255,0.97), rgba(240, 253, 250, 0.92) 50%, rgba(236, 254, 255, 0.88));
+  box-shadow: 0 2px 0 rgba(20, 184, 166, 0.08);
 }
 
 .dark .header-gradient {
   background: linear-gradient(135deg, rgba(15,23,42,0.97), rgba(2, 6, 23, 0.9));
 }
 
-/* Progress bar glow */
+/* Progress bar glow — light mode: brighter */
 .progress-glow {
-  box-shadow: 0 0 12px rgba(16, 185, 129, 0.5), 0 1px 0 rgba(255,255,255,0.3) inset;
+  box-shadow: 0 0 12px rgba(16, 185, 129, 0.45), 0 0 6px rgba(6, 182, 212, 0.2), 0 1px 0 rgba(255,255,255,0.4) inset;
+}
+
+/* File attachment card — light mode: 3D depth with colored top accent */
+.file-card-3d {
+  transition: transform 200ms ease, box-shadow 200ms ease;
+  box-shadow:
+    0 6px 16px -8px rgba(15, 23, 42, 0.2),
+    0 4px 12px -10px rgba(59, 130, 246, 0.12),
+    0 2px 0 rgba(148, 163, 184, 0.15),
+    0 1px 0 rgba(255, 255, 255, 0.8) inset;
+}
+
+.file-card-3d:hover {
+  transform: translateY(-1px);
+  box-shadow:
+    0 10px 20px -8px rgba(15, 23, 42, 0.22),
+    0 6px 16px -10px rgba(59, 130, 246, 0.18),
+    0 3px 0 rgba(148, 163, 184, 0.18),
+    0 1px 0 rgba(255, 255, 255, 0.95) inset;
+}
+
+/* Image attachment card — light mode: subtle ring glow */
+.image-card-3d {
+  transition: transform 200ms ease, box-shadow 200ms ease;
+  box-shadow:
+    0 6px 18px -8px rgba(15, 23, 42, 0.2),
+    0 4px 12px -10px rgba(6, 182, 212, 0.12);
+}
+
+.image-card-3d:hover {
+  transform: translateY(-1px) scale(1.01);
+  box-shadow:
+    0 10px 24px -8px rgba(15, 23, 42, 0.25),
+    0 6px 16px -10px rgba(6, 182, 212, 0.2);
+}
+
+/* Date divider — light mode: gradient line */
+.date-divider-line {
+  background: linear-gradient(to right, transparent, rgb(20 184 166 / 0.25), rgb(6 182 212 / 0.25), transparent);
+}
+
+.dark .date-divider-line {
+  background: linear-gradient(to right, transparent, rgb(51 65 85), transparent);
+}
+
+/* Download button — light mode: 3D pill */
+.download-btn-3d {
+  transition: transform 150ms ease, box-shadow 150ms ease, filter 150ms ease;
+  box-shadow:
+    0 3px 10px -4px rgba(16, 185, 129, 0.4),
+    0 2px 0 rgb(5 150 105 / 0.25),
+    0 1px 0 rgba(255,255,255,0.4) inset;
+}
+
+.download-btn-3d:hover {
+  transform: translateY(-1px);
+  filter: brightness(1.05);
+  box-shadow:
+    0 5px 12px -4px rgba(16, 185, 129, 0.5),
+    0 3px 0 rgb(5 150 105 / 0.3),
+    0 1px 0 rgba(255,255,255,0.5) inset;
+}
+
+.download-btn-3d:active {
+  transform: translateY(1px);
+}
+
+/* Mode tab — active light variant */
+.mode-tab-active-code {
+  background: linear-gradient(135deg, rgba(139, 92, 246, 0.12), rgba(124, 58, 237, 0.08));
+  box-shadow: 0 2px 8px -4px rgba(139, 92, 246, 0.2), 0 1px 0 rgba(255,255,255,0.5) inset;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -385,7 +471,10 @@
   .keypad-3d,
   .scroll-btn-3d,
   .animated-gradient,
-  .gradient-text {
+  .gradient-text,
+  .file-card-3d,
+  .image-card-3d,
+  .download-btn-3d {
     transition: none;
     animation: none;
   }
@@ -401,7 +490,11 @@
   .bubble-3d:hover,
   .keypad-3d:hover,
   .keypad-3d:active,
-  .scroll-btn-3d:hover {
+  .scroll-btn-3d:hover,
+  .file-card-3d:hover,
+  .image-card-3d:hover,
+  .download-btn-3d:hover,
+  .download-btn-3d:active {
     transform: none;
   }
 }

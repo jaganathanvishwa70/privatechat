@@ -266,11 +266,11 @@ export function ChatScreen({ darkMode, onToggleDarkMode, onLock }: ChatScreenPro
       <aside
         className={`${
           sidebarOpen ? 'translate-x-0' : '-translate-x-full'
-        } md:translate-x-0 fixed md:relative z-30 w-72 h-full sidebar-gradient border-r border-emerald-100/50 dark:border-slate-800 flex flex-col transition-transform`}
+        } md:translate-x-0 fixed md:relative z-30 w-72 h-full sidebar-gradient border-r border-teal-200/40 dark:border-slate-800 flex flex-col transition-transform`}
       >
-        <div className="flex items-center justify-between p-4 border-b border-emerald-100/40 dark:border-slate-800">
+        <div className="flex items-center justify-between p-4 border-b border-teal-200/40 dark:border-slate-800">
           <div className="flex items-center gap-2.5">
-            <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-emerald-400 via-teal-500 to-cyan-500 flex items-center justify-center shadow-md shadow-emerald-500/25">
+            <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-emerald-400 via-teal-500 to-cyan-500 flex items-center justify-center shadow-md shadow-teal-500/30">
               <MessageSquare className="w-4.5 h-4.5 text-white" />
             </div>
             <span className="font-bold gradient-text text-sm">My Chats</span>
@@ -367,13 +367,13 @@ export function ChatScreen({ darkMode, onToggleDarkMode, onLock }: ChatScreenPro
           )}
         </div>
 
-        <div className="p-3 space-y-3 border-t border-emerald-100/40 dark:border-slate-800">
+        <div className="p-3 space-y-3 border-t border-teal-200/40 dark:border-slate-800">
           <StorageUsage />
           <button
             onClick={onLock}
-            className="btn-3d-secondary w-full flex items-center justify-center gap-2 py-2 text-sm font-medium text-slate-600 dark:text-slate-300 bg-gradient-to-br from-slate-100 to-slate-50 dark:from-slate-800 dark:to-slate-900 hover:from-slate-200 hover:to-slate-100 dark:hover:from-slate-700 dark:hover:to-slate-800 rounded-xl transition"
+            className="btn-3d-secondary w-full flex items-center justify-center gap-2 py-2 text-sm font-medium text-slate-600 dark:text-slate-300 bg-gradient-to-br from-rose-50 to-orange-50 dark:from-slate-800 dark:to-slate-900 hover:from-rose-100 hover:to-orange-100 dark:hover:from-slate-700 dark:hover:to-slate-800 rounded-xl transition"
           >
-            <Lock className="w-4 h-4" /> Lock
+            <Lock className="w-4 h-4 text-rose-500 dark:text-slate-300" /> Lock
           </button>
         </div>
       </aside>
@@ -381,7 +381,7 @@ export function ChatScreen({ darkMode, onToggleDarkMode, onLock }: ChatScreenPro
       {sidebarOpen && <div className="fixed inset-0 bg-black/30 z-20 md:hidden" onClick={() => setSidebarOpen(false)} />}
 
       <div className="flex-1 flex flex-col h-full min-w-0 min-h-0 chat-bg-gradient">
-        <header className="header-gradient shrink-0 sticky top-0 z-20 flex items-center gap-3 px-3 sm:px-4 py-3 backdrop-blur border-b border-emerald-100/40 dark:border-slate-800 shadow-[0_2px_20px_rgba(16,185,129,0.06)]">
+        <header className="header-gradient shrink-0 sticky top-0 z-20 flex items-center gap-3 px-3 sm:px-4 py-3 backdrop-blur border-b border-teal-200/40 dark:border-slate-800 shadow-[0_4px_24px_rgba(20,184,166,0.08)]">
           <button onClick={() => setSidebarOpen(true)} className="md:hidden text-slate-500 hover:text-emerald-600 transition">
             <Menu className="w-5 h-5" />
           </button>
@@ -390,7 +390,7 @@ export function ChatScreen({ darkMode, onToggleDarkMode, onLock }: ChatScreenPro
           </h1>
           <div className="flex items-center gap-1.5">
             <ThemeToggle darkMode={darkMode} onToggle={onToggleDarkMode} compact />
-            <button onClick={onLock} className="btn-3d-secondary w-9 h-9 rounded-xl text-slate-400 hover:text-rose-500 dark:hover:text-rose-400 bg-white/60 dark:bg-slate-800/60 hover:bg-rose-50 dark:hover:bg-slate-800 transition flex items-center justify-center" title="Lock">
+            <button onClick={onLock} className="btn-3d-secondary w-9 h-9 rounded-xl text-slate-400 hover:text-rose-500 dark:hover:text-rose-400 bg-gradient-to-br from-white/80 to-rose-50/60 dark:bg-slate-800/60 hover:from-rose-50 hover:to-rose-100/80 dark:hover:bg-slate-800 transition flex items-center justify-center" title="Lock">
               <Lock className="w-4 h-4" />
             </button>
           </div>

@@ -58,7 +58,7 @@ export function FileAttachmentCard({ attachment, timestamp }: FileAttachmentCard
   }
 
   return (
-    <div className="max-w-sm w-full rounded-2xl ring-1 ring-slate-200 bg-white overflow-hidden shadow-sm">
+    <div className="file-card-3d max-w-sm w-full rounded-2xl ring-1 ring-teal-200/50 bg-gradient-to-br from-white via-white to-teal-50/30 overflow-hidden">
       <div className="flex items-center gap-3 p-3.5">
         <div
           className="w-11 h-13 rounded-lg flex flex-col items-center justify-center shrink-0 text-white font-bold relative"
@@ -79,7 +79,7 @@ export function FileAttachmentCard({ attachment, timestamp }: FileAttachmentCard
         <button
           onClick={download}
           disabled={downloading}
-          className="shrink-0 flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium text-emerald-700 bg-emerald-50 hover:bg-emerald-100 rounded-lg transition disabled:opacity-60"
+          className="download-btn-3d shrink-0 flex items-center gap-1.5 px-3 py-1.5 text-xs font-semibold text-white bg-gradient-to-br from-emerald-500 to-teal-600 hover:from-emerald-600 hover:to-teal-700 rounded-lg transition disabled:opacity-60"
         >
           {downloading ? <Loader2 className="w-3.5 h-3.5 animate-spin" /> : <Download className="w-3.5 h-3.5" />}
           {downloading ? '…' : 'Download'}
@@ -119,7 +119,7 @@ export function ImageAttachment({ attachment, timestamp, onOpen }: ImageAttachme
   return (
     <div className="max-w-xs">
       <div
-        className="relative rounded-2xl overflow-hidden ring-1 ring-slate-200 bg-slate-100 cursor-pointer group"
+        className="image-card-3d relative rounded-2xl overflow-hidden ring-1 ring-teal-200/50 bg-gradient-to-br from-slate-50 to-teal-50/20 cursor-pointer group"
         onClick={() => onOpen(attachment)}
         style={{ aspectRatio: 'auto' }}
       >

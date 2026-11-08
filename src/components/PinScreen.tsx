@@ -57,9 +57,10 @@ export function PinScreen({ darkMode, onToggleDarkMode, onUnlock }: PinScreenPro
 
   return (
     <div className="relative min-h-screen flex items-center justify-center px-4 overflow-hidden bg-gradient-to-br from-slate-100 via-teal-50 to-cyan-50 dark:from-slate-950 dark:via-slate-900 dark:to-emerald-950/50 transition-colors">
-      {/* Decorative gradient orbs */}
-      <div className="absolute top-10 left-10 w-48 h-48 rounded-full bg-gradient-to-br from-emerald-300/30 to-teal-300/20 blur-3xl pointer-events-none" />
-      <div className="absolute bottom-10 right-10 w-56 h-56 rounded-full bg-gradient-to-br from-cyan-300/25 to-blue-300/15 blur-3xl pointer-events-none" />
+      {/* Decorative gradient orbs — light mode: multi-color */}
+      <div className="absolute top-10 left-10 w-48 h-48 rounded-full bg-gradient-to-br from-emerald-300/40 to-teal-300/25 blur-3xl pointer-events-none" />
+      <div className="absolute bottom-10 right-10 w-56 h-56 rounded-full bg-gradient-to-br from-cyan-300/35 to-blue-300/20 blur-3xl pointer-events-none" />
+      <div className="absolute top-1/3 right-1/4 w-40 h-40 rounded-full bg-gradient-to-br from-violet-200/20 to-fuchsia-200/10 blur-3xl pointer-events-none" />
 
       <div className="absolute top-4 right-4 z-10">
         <ThemeToggle darkMode={darkMode} onToggle={onToggleDarkMode} />
@@ -115,7 +116,7 @@ export function PinScreen({ darkMode, onToggleDarkMode, onUnlock }: PinScreenPro
               key={d}
               onClick={() => press(d)}
               disabled={error}
-              className="keypad-3d w-16 h-16 text-xl font-semibold text-slate-700 dark:text-slate-100 bg-gradient-to-br from-white to-slate-50 dark:from-slate-800 dark:to-slate-900 rounded-2xl ring-1 ring-slate-200 dark:ring-slate-700 hover:from-emerald-50 hover:to-teal-50 dark:hover:from-slate-700 dark:hover:to-slate-800 active:scale-95 transition disabled:opacity-50"
+              className="keypad-3d w-16 h-16 text-xl font-semibold text-slate-700 dark:text-slate-100 bg-gradient-to-br from-white via-teal-50/30 to-cyan-50/20 dark:from-slate-800 dark:to-slate-900 rounded-2xl ring-1 ring-teal-200/50 dark:ring-slate-700 hover:from-emerald-50 hover:to-teal-50 dark:hover:from-slate-700 dark:hover:to-slate-800 active:scale-95 transition disabled:opacity-50"
             >
               {d}
             </button>
@@ -124,7 +125,7 @@ export function PinScreen({ darkMode, onToggleDarkMode, onUnlock }: PinScreenPro
           <button
             onClick={() => press('0')}
             disabled={error}
-            className="keypad-3d w-16 h-16 text-xl font-semibold text-slate-700 dark:text-slate-100 bg-gradient-to-br from-white to-slate-50 dark:from-slate-800 dark:to-slate-900 rounded-2xl ring-1 ring-slate-200 dark:ring-slate-700 hover:from-emerald-50 hover:to-teal-50 dark:hover:from-slate-700 dark:hover:to-slate-800 active:scale-95 transition disabled:opacity-50"
+            className="keypad-3d w-16 h-16 text-xl font-semibold text-slate-700 dark:text-slate-100 bg-gradient-to-br from-white via-teal-50/30 to-cyan-50/20 dark:from-slate-800 dark:to-slate-900 rounded-2xl ring-1 ring-teal-200/50 dark:ring-slate-700 hover:from-emerald-50 hover:to-teal-50 dark:hover:from-slate-700 dark:hover:to-slate-800 active:scale-95 transition disabled:opacity-50"
           >
             0
           </button>
@@ -137,7 +138,7 @@ export function PinScreen({ darkMode, onToggleDarkMode, onUnlock }: PinScreenPro
           </button>
         </div>
 
-        <p className="text-[11px] text-slate-300 mt-8">Enter PIN to access your messages</p>
+        <p className="text-[11px] text-teal-400/60 dark:text-slate-600 mt-8">Enter PIN to access your messages</p>
       </div>
     </div>
   );

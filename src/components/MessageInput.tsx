@@ -163,7 +163,7 @@ export function MessageInput({ onSend, disabled }: MessageInputProps) {
   }
 
   return (
-    <div className="depth-surface relative bg-gradient-to-b from-white/90 to-slate-50/80 dark:from-slate-900/90 dark:to-slate-950/80 backdrop-blur border-t border-emerald-100/40 dark:border-slate-800">
+    <div className="depth-surface relative bg-gradient-to-b from-white/95 via-teal-50/30 to-cyan-50/20 dark:from-slate-900/90 dark:to-slate-950/80 backdrop-blur border-t border-teal-200/40 dark:border-slate-800">
       {/* pending previews */}
       {pending.length > 0 && (
         <div className="px-3 pt-3 flex flex-wrap gap-2">
@@ -261,23 +261,27 @@ export function MessageInput({ onSend, disabled }: MessageInputProps) {
           </button>
         </div>
 
-        <div className="depth-card flex-1 rounded-2xl bg-gradient-to-br from-slate-50 to-white dark:from-slate-800 dark:to-slate-900 ring-1 ring-slate-200/80 dark:ring-slate-700 focus-within:ring-2 focus-within:ring-emerald-300 dark:focus-within:ring-emerald-700 transition overflow-hidden">
+        <div className="depth-card flex-1 rounded-2xl bg-gradient-to-br from-white via-teal-50/30 to-cyan-50/20 dark:from-slate-800 dark:to-slate-900 ring-1 ring-teal-200/60 dark:ring-slate-700 focus-within:ring-2 focus-within:ring-emerald-300 dark:focus-within:ring-emerald-700 transition overflow-hidden">
           {/* mode selector */}
           <div className="flex items-center gap-1.5 px-3 pt-2 overflow-x-auto whitespace-nowrap no-scrollbar">
             <button
               onClick={() => setMode('normal')}
-              className={`shrink-0 flex items-center gap-1.5 text-xs font-medium px-2.5 py-1 rounded-lg transition ${
-                mode === 'normal' ? 'bg-emerald-100 text-emerald-700' : 'text-slate-500 hover:text-slate-700'
-              }`}
-            >
+              className={`shrink-0 flex items-center gap-1.5 text-xs font-semibold px-2.5 py-1 rounded-lg transition ${
+                mode === 'normal'
+                  ? 'bg-gradient-to-br from-emerald-100 to-teal-100 text-emerald-700 shadow-sm'
+                  : 'text-slate-500 hover:text-slate-700 hover:bg-slate-100/60'
+              }`
+            }>
               Normal
             </button>
             <button
               onClick={() => { setMode('code'); if (!codeLang || codeLang === 'text') setCodeLang('javascript'); }}
-              className={`shrink-0 flex items-center gap-1.5 text-xs font-medium px-2.5 py-1 rounded-lg transition ${
-                mode === 'code' ? 'bg-violet-100 text-violet-700' : 'text-slate-500 hover:text-slate-700'
-              }`}
-            >
+              className={`shrink-0 flex items-center gap-1.5 text-xs font-semibold px-2.5 py-1 rounded-lg transition ${
+                mode === 'code'
+                  ? 'mode-tab-active-code text-violet-700'
+                  : 'text-slate-500 hover:text-slate-700 hover:bg-slate-100/60'
+              }`
+            }>
               <Code2 className="w-3.5 h-3.5" />
               Code
             </button>
@@ -286,7 +290,7 @@ export function MessageInput({ onSend, disabled }: MessageInputProps) {
                 <select
                   value={codeLang}
                 onChange={(e) => setCodeLang(e.target.value)}
-                className="shrink-0 max-w-[122px] text-xs font-medium px-2 py-1 rounded-lg bg-slate-200 text-slate-700 border-0 focus:outline-none cursor-pointer"
+                className="shrink-0 max-w-[122px] text-xs font-semibold px-2 py-1 rounded-lg bg-gradient-to-br from-slate-100 to-slate-50 text-slate-700 border-0 focus:outline-none cursor-pointer hover:from-slate-200 hover:to-slate-100 transition"
               >
                 <option value="text">Plain text</option>
                 <option value="javascript">JavaScript</option>
@@ -306,7 +310,7 @@ export function MessageInput({ onSend, disabled }: MessageInputProps) {
                 <button
                   type="button"
                   onClick={pasteCode}
-                  className="shrink-0 flex items-center gap-1.5 text-xs font-medium px-2.5 py-1 rounded-lg bg-slate-200 text-slate-700 hover:bg-slate-300 active:bg-slate-300 transition"
+                  className="shrink-0 flex items-center gap-1.5 text-xs font-semibold px-2.5 py-1 rounded-lg bg-gradient-to-br from-blue-50 to-cyan-50 text-blue-600 hover:from-blue-100 hover:to-cyan-100 active:from-blue-100 active:to-cyan-100 transition"
                   title="Paste from clipboard"
                 >
                   <Clipboard className="w-3.5 h-3.5" />
