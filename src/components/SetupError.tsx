@@ -6,7 +6,7 @@ interface SetupErrorProps {
 
 export function SetupError({ missingVars }: SetupErrorProps) {
   return (
-    <div className="min-h-screen flex items-center justify-center px-4 bg-gradient-to-br from-slate-100 via-teal-50 to-cyan-50 dark:from-slate-950 dark:via-slate-900 dark:to-emerald-950/50 transition-colors">
+    <div className="min-h-screen flex items-center justify-center px-4 bg-gradient-to-br from-slate-100 via-teal-50 to-sky-100 dark:from-slate-950 dark:via-slate-900 dark:to-emerald-950/50 transition-colors">
       <div className="w-full max-w-md flex flex-col items-center text-center">
         <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-amber-400 to-orange-500 flex items-center justify-center shadow-lg shadow-amber-500/30 mb-5">
           <AlertTriangle className="w-8 h-8 text-white" strokeWidth={2.2} />

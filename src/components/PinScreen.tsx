@@ -56,10 +56,10 @@ export function PinScreen({ darkMode, onToggleDarkMode, onUnlock }: PinScreenPro
   }
 
   return (
-    <div className="relative min-h-screen flex items-center justify-center px-4 overflow-hidden bg-gradient-to-br from-slate-100 via-teal-50 to-cyan-50 dark:from-slate-950 dark:via-slate-900 dark:to-emerald-950/50 transition-colors">
-      {/* Decorative gradient orbs — light mode: multi-color */}
+    <div className="relative min-h-screen flex items-center justify-center px-4 overflow-hidden bg-gradient-to-br from-slate-100 via-teal-50 to-sky-100 dark:from-slate-950 dark:via-slate-900 dark:to-emerald-950/50 transition-colors">
+      {/* Decorative gradient orbs — light mode: multi-color + HCL blue */}
       <div className="absolute top-10 left-10 w-48 h-48 rounded-full bg-gradient-to-br from-emerald-300/40 to-teal-300/25 blur-3xl pointer-events-none" />
-      <div className="absolute bottom-10 right-10 w-56 h-56 rounded-full bg-gradient-to-br from-cyan-300/35 to-blue-300/20 blur-3xl pointer-events-none" />
+      <div className="absolute bottom-10 right-10 w-56 h-56 rounded-full bg-gradient-to-br from-sky-400/30 to-blue-600/15 blur-3xl pointer-events-none" />
       <div className="absolute top-1/3 right-1/4 w-40 h-40 rounded-full bg-gradient-to-br from-violet-200/20 to-fuchsia-200/10 blur-3xl pointer-events-none" />
 
       <div className="absolute top-4 right-4 z-10">

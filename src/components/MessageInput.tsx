@@ -220,7 +220,7 @@ export function MessageInput({ onSend, disabled }: MessageInputProps) {
             onClick={openFilePicker}
             className="depth-card flex items-center gap-2.5 pl-2.5 pr-4 py-2 bg-white dark:bg-slate-800 rounded-xl ring-1 ring-blue-200/50 dark:ring-slate-700 hover:ring-blue-300 transition"
           >
-            <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-blue-400 to-cyan-500 flex items-center justify-center shadow-sm">
+            <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-sky-400 to-blue-600 flex items-center justify-center shadow-sm shadow-blue-500/30">
               <Paperclip className="w-4 h-4 text-white" />
             </div>
             <span className="text-sm font-medium text-slate-700 dark:text-slate-200">File</span>
@@ -310,7 +310,7 @@ export function MessageInput({ onSend, disabled }: MessageInputProps) {
                 <button
                   type="button"
                   onClick={pasteCode}
-                  className="shrink-0 flex items-center gap-1.5 text-xs font-semibold px-2.5 py-1 rounded-lg bg-gradient-to-br from-blue-50 to-cyan-50 text-blue-600 hover:from-blue-100 hover:to-cyan-100 active:from-blue-100 active:to-cyan-100 transition"
+                  className="shrink-0 flex items-center gap-1.5 text-xs font-semibold px-2.5 py-1 rounded-lg bg-gradient-to-br from-sky-50 to-blue-50 text-blue-700 hover:from-sky-100 hover:to-blue-100 active:from-sky-100 active:to-blue-100 transition"
                   title="Paste from clipboard"
                 >
                   <Clipboard className="w-3.5 h-3.5" />
